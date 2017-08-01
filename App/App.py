@@ -1,5 +1,9 @@
 import csv
 import datetime
+import matplotlib.pyplot as plt
+from matplotlib import style
+
+
 
 filename_import = 'data/Tickers.csv'
 column = 'Ticker'
@@ -31,6 +35,7 @@ print(Stock_prices['Adj Close'])
 
 
 final_data = Stock_prices['Adj Close']
-
+final_data.plot()
+plt.show()
 
 final_data.to_csv("data/Stock_prices.csv")
