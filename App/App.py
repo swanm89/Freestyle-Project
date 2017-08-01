@@ -1,19 +1,36 @@
+import csv
 import datetime
-import pandas_datareader.data as web
+
+filename_import = 'data/Tickers.csv'
+column = 'Ticker'
+
+data = []
+
+reader = csv.reader(open( filename_import, 'rU'), delimiter=',', dialect='excel')
+hrow = next(reader)
+idx = hrow.index(column)
+for row in reader:
+ data.append( row[idx] )
+
+
+#get the beginning year of the data pulled
+year = int(input('Enter the year of how far the data should go back:'))
+month = int(input('Enter the month, in numbers, of how far the data should go back:'))
+day = int(input('Enter the day of the month of how far the data should go back:'))
+date1 = datetime.date(year, month, day)
+
+
+End_date = datetime.datetime.now()
+
+import pandas_datareader as pdr
+from datetime import datetime
+
+Stock_prices = pdr.get_data_yahoo(symbols=data, start=date1, end=End_date)
+print(Stock_prices['Adj Close'])
 
 
 
-stock_tickers = []
+final_data = Stock_prices['Adj Close']
 
 
-while True:
-    stock_ticker = input("Please input a valid product identifier, or DONE if finished:")
-    if stock_ticker == "DONE":
-        break
-    else:
-        stock_tickers.append(stock_ticker)
-
-
-q = web.get_quote_google(stock_tickers)
-
-print(q)
+final_data.to_csv("data/Stock_prices.csv")
