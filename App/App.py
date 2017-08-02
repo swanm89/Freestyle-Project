@@ -16,6 +16,12 @@ idx = hrow.index(column)
 for row in reader:
  data.append( row[idx] )
 
+print("Welcome to First Alpha Capital")
+print("------------------------------")
+print("This applocation will allow you to pull daily stock prices from a list of tickers")
+print("------------------------------")
+
+
 
 #get the beginning year of the data pulled
 year = int(input('Enter the year of how far the data should go back:'))
@@ -31,11 +37,13 @@ from datetime import datetime
 
 Stock_prices = pdr.get_data_yahoo(symbols=data, start=date1, end=End_date)
 print(Stock_prices['Adj Close'])
-
-
-
 final_data = Stock_prices['Adj Close']
-final_data.plot()
-plt.show()
+Graphs = input("Do you want to graph this data (Yes or No):")
+
+if Graphs == "Yes":
+    final_data.plot()
+    plt.show()
+
 
 final_data.to_csv("data/Stock_prices.csv")
+print('Please check the Stock_prices file for data output')
