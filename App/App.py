@@ -46,4 +46,4 @@ if Graphs == "Yes":
 
 
 final_data.to_csv("data/Stock_prices.csv")
-print('Please check the Stock_prices file for data output')
+print('Please check the Stock_prices file in the data folder for output')
